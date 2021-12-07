@@ -10,7 +10,7 @@ export type TypedResponsePromise<
 > = ResponsePromise & {
 	json(): Promise<
 		R[Url][Method] extends BaseRouteMethodSchema
-			? R[Url][Method]['reply']
+			? R[Url][Method]['replies']
 			: never
 	>;
 };

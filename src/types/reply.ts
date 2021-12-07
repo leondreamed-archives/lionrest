@@ -1,3 +1,6 @@
+import type { HttpMethod } from './method';
+import type { BaseRestSchema, BaseRouteMethodSchema } from './schema';
+
 export interface Reply<
 	Code extends string,
 	StatusCode extends number,
@@ -8,28 +11,28 @@ export interface Reply<
 	data: Data;
 }
 
-export type BaseReply = Reply<string, number, unknown | null>;
+export type BaseReplies = Reply<string, number, unknown | null>[];
 
-export interface ReplyBlueprint<
-	Code extends string,
-	StatusCode extends number,
-	Data extends unknown | null = null
-> {
-	code: Code;
-	statusCode: StatusCode;
-	hasData: Data extends null ? false : true;
-}
+export type MapRepliesToReplyCreator<Replies extends BaseReplies> = {
+	[R in keyof Replies & number]: Replies[R]['data'] extends null
+		? () => {
+				code: Replies[R]['code'];
+				statusCode: Replies[R]['statusCode'];
+				data: null;
+		  }
+		: <D extends Replies[R]['data']>(
+				data: D
+		  ) => {
+				code: Replies[R]['code'];
+				statusCode: Replies[R]['statusCode'];
+				data: D;
+		  };
+};
 
 export type ServerRepliesCreator<
-	ReplyBlueprints extends ReplyBlueprint<string, number, unknown>[]
-> = {
-	[RB in ReplyBlueprints[number] as RB['code']]: RB extends ReplyBlueprint<
-		infer Code,
-		infer StatusCode,
-		infer Data
-	>
-		? Data extends null
-			? () => Reply<Code, StatusCode, Data>
-			: <D extends Data>(data: D) => Reply<Code, StatusCode, D>
-		: never;
-};
+	R extends BaseRestSchema,
+	Url extends string,
+	Method extends HttpMethod
+> = R[Url][Method] extends BaseRouteMethodSchema
+	? MapRepliesToReplyCreator<R[Url][Method]['replies']>
+	: never;

@@ -9,11 +9,11 @@ const mySchema = defRestSchema({
 			searchParams: Type.Object({
 				query: Type.String(),
 			}),
-			reply: defReply<{
+			reply: defReplies<[{
 				code: 'success';
 				data: null;
 				statusCode: 200;
-			}>(),
+			}]>(),
 		},
 		post: {
 			headers: Type.Object({
@@ -22,13 +22,14 @@ const mySchema = defRestSchema({
 			body: Type.Object({
 				username: Type.String(),
 			}),
-			reply: defReply<{
+			reply: defReplies<[{
 				code: 'failure';
 				data: null;
 				statusCode: 403;
-			}>(),
+			}]>(),
 		},
 	},
 });
+
 
 export type MySchema = typeof mySchema;

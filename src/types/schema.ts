@@ -1,13 +1,12 @@
-import type { Reply } from './reply';
+import type { BaseReplies } from './reply';
 
-type BaseHeaders = Record<string, string>;
-type BaseSearchParams = Record<string, string>;
-type BaseReply = Reply<string, number, Record<string, unknown> | null>;
-type BaseBody = Record<string, unknown>;
+export type BaseHeaders = Record<string, string>;
+export type BaseSearchParams = Record<string, string>;
+export type BaseBody = Record<string, unknown>;
 
 export type BaseRouteMethodSchema = {
 	headers: BaseHeaders;
-	reply: BaseReply;
+	replies: BaseReplies;
 };
 
 export type BaseGetSchema = BaseRouteMethodSchema & {
