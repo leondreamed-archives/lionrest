@@ -8,6 +8,8 @@ export interface Reply<
 	data: Data;
 }
 
+export type BaseReply = Reply<string, number, unknown | null>;
+
 export interface ReplyBlueprint<
 	Code extends string,
 	StatusCode extends number,
