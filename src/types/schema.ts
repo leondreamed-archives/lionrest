@@ -3,18 +3,21 @@ import type { BaseReplies } from './reply';
 export type BaseHeaders = Record<string, string>;
 export type BaseSearchParams = Record<string, string>;
 export type BaseBody = Record<string, unknown>;
+export type BaseUrlParams = Record<string, string | number>;
+export interface UrlParam<_T extends string | number> {}
 
 export type BaseRouteMethodSchema = {
-	headers: BaseHeaders;
-	replies: BaseReplies;
+	headers?: BaseHeaders;
+	replies?: BaseReplies;
+	urlParams?: BaseUrlParams;
 };
 
 export type BaseGetSchema = BaseRouteMethodSchema & {
-	searchParams: BaseSearchParams;
+	searchParams?: BaseSearchParams;
 };
 
 export type BaseNonGetSchema = BaseRouteMethodSchema & {
-	body: BaseBody;
+	body?: BaseBody;
 };
 
 export type BasePostSchema = BaseNonGetSchema;

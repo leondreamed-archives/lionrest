@@ -44,6 +44,7 @@ export type RouteMethodBlueprint = {
 	headers?: TObject<{
 		[header: string]: TString | TOptional<TString>;
 	}>;
+	urlParams?: Record<string, unknown>;
 	replies: {
 		[replyCode: string]: ReplyData<number, unknown>;
 	};

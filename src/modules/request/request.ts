@@ -20,7 +20,7 @@ export function requestModule<B extends RestSchemaBlueprint>() {
 	return defineMethods({
 		get<Url extends RestSchemaUrls<GetRoutes<B>>>(
 			url: Url,
-			options?: TypedKyOptions<B, Url, 'get'>
+			options: TypedKyOptions<B, Url, 'get'>
 		): TypedResponsePromise<B, Url, 'get'> {
 			return ky.get(url, options);
 		},
