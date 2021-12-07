@@ -1,1 +1,3 @@
-export {};
+function createLionrest<S extends RestSchema>() {
+
+}

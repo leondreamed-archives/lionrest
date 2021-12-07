@@ -11,15 +11,19 @@ specifiers:
   eslint: ^8.4.1
   execa: ^6.0.0
   husky: ^7.0.4
+  ky: ^0.28.7
   lint-staged: ^12.1.2
   prettier: ^2.5.1
   ts-node: ^10.4.0
   typescript: ^4.5.2
 
+dependencies:
+  ky: 0.28.7
+
 devDependencies:
   '@commitlint/cli': 15.0.0
   '@commitlint/config-conventional': 15.0.0
-  '@leonzalion/eslint-config': 1.0.4_eslint@8.4.1+typescript@4.5.2
+  '@leonzalion/eslint-config': 1.0.6_eslint@8.4.1+typescript@4.5.2
   '@leonzalion/markdownlint-config': 1.0.0
   '@leonzalion/prettier-config': 1.0.2_prettier@2.5.1
   '@leonzalion/tsconfig': 1.0.4
@@ -461,8 +465,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@leonzalion/eslint-config/1.0.4_eslint@8.4.1+typescript@4.5.2:
-    resolution: {integrity: sha512-fAITDqf3vLb/Ky8PcuyUtK2pxwtTBsCifzvyWeL3aTGCOi1aZBbtLxV5EwUbzWQmli4aHEgE/WwCNIrs7inaNw==}
+  /@leonzalion/eslint-config/1.0.6_eslint@8.4.1+typescript@4.5.2:
+    resolution: {integrity: sha512-NU0BbpG5upOqa8Iy1Z/yhNUBmvbIz3uzmWrIEuKlPwxbQAipiRKmUY7skYnCzaDP5tbSCAkdtfDbw3PLmqBh/w==}
     peerDependencies:
       eslint: ^8.4.0
     dependencies:
@@ -2060,6 +2064,11 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /ky/0.28.7:
+    resolution: {integrity: sha512-a23i6qSr/ep15vdtw/zyEQIDLoUaKDg9Jf04CYl/0ns/wXNYna26zJpI+MeIFaPeDvkrjLPrKtKOiiI3IE53RQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /levn/0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
