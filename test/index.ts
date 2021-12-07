@@ -1,5 +1,7 @@
 import { Type } from '@sinclair/typebox';
 
+import { defReply, defRestSchema } from '../src';
+
 const mySchema = defRestSchema({
 	'/route1': {
 		get: {
@@ -9,11 +11,10 @@ const mySchema = defRestSchema({
 			searchParams: Type.Object({
 				query: Type.String(),
 			}),
-			reply: defReplies<[{
-				code: 'success';
-				data: null;
-				statusCode: 200;
-			}]>(),
+			replies: {
+				success: defReply<null>().statusCode(200),
+				failure: defReply<{ message: string }>().statusCode(403),
+			},
 		},
 		post: {
 			headers: Type.Object({
@@ -22,14 +23,11 @@ const mySchema = defRestSchema({
 			body: Type.Object({
 				username: Type.String(),
 			}),
-			reply: defReplies<[{
-				code: 'failure';
-				data: null;
-				statusCode: 403;
-			}]>(),
+			replies: {
+				failure: defReply<null>().statusCode(403),
+			},
 		},
 	},
 });
-
 
 export type MySchema = typeof mySchema;

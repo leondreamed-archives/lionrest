@@ -1,14 +1,20 @@
 import type { HttpMethod } from './method';
 import type { BaseRestSchema, BaseRouteMethodSchema } from './schema';
 
+export interface ReplyData<
+	StatusCode extends number,
+	Data extends unknown | null = null
+> {
+	statusCode: StatusCode;
+	data: Data;
+}
+
 export interface Reply<
 	Code extends string,
 	StatusCode extends number,
 	Data extends unknown | null = null
-> {
+> extends ReplyData<StatusCode, Data> {
 	code: Code;
-	statusCode: StatusCode;
-	data: Data;
 }
 
 export type BaseReplies = Reply<string, number, unknown | null>[];
