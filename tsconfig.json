@@ -1,6 +1,7 @@
 {
 	"extends": "@leonzalion/tsconfig/tsconfig.json",
 	"compilerOptions": {
+		"module": "esnext",
 		"outDir": "dist",
 		"rootDir": "./src",
 		"paths": {

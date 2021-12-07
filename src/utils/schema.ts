@@ -13,9 +13,13 @@ export type RestSchemaTypeFromBlueprint<B extends RestSchemaBlueprint> = {
 	[Route in keyof B]: {
 		[RouteMethod in keyof B[Route]]: B[Route][RouteMethod] extends RouteMethodBlueprint
 			? Omit<B[Route][RouteMethod], 'headers' | 'searchParams' | 'body'> & {
-					headers: Static<B[Route][RouteMethod]['headers']>;
+					headers: Static<NonNullable<B[Route][RouteMethod]['headers']>>;
 			  } & (B[Route][RouteMethod] extends GetRouteMethodBlueprint
-						? { searchParams: Static<B[Route][RouteMethod]['searchParams']> }
+						? {
+								searchParams: Static<
+									NonNullable<B[Route][RouteMethod]['searchParams']>
+								>;
+						  }
 						: B[Route][RouteMethod] extends NonGetRouteMethodBlueprint
 						? { body: Static<B[Route][RouteMethod]['body']> }
 						: never)
