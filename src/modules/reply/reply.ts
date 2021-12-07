@@ -1,20 +1,20 @@
 import type { HttpMethod } from '~/types/method';
 import type { ServerRepliesCreator } from '~/types/reply';
+import type { RestSchemaBlueprint } from '~/utils/schema';
 
-import type { BaseRestSchema } from '../../types/schema';
 import { useDefineMethods } from '../../utils/methods';
 
-export function replyModule<R extends BaseRestSchema>() {
-	const defineMethods = useDefineMethods<R>();
+export function replyModule<B extends RestSchemaBlueprint>() {
+	const defineMethods = useDefineMethods<B>();
 
 	return defineMethods({
 		useReplyCreator: function <Method extends HttpMethod, Url extends string>(
 			method: Method,
 			url: Url
-		): ServerRepliesCreator<R, Url, Method> {
-			const serverReplies = {} as ServerRepliesCreator<R, Url, Method>;
+		): ServerRepliesCreator<B, Url, Method> {
+			const serverReplies = {} as ServerRepliesCreator<B, Url, Method>;
 			for (const [code, { data, statusCode }] of Object.entries(
-				this.schema[url]![method]!.replies
+				this.schemaBlueprint[url]![method]!.replies
 			)) {
 				if (data === null) {
 					(serverReplies as any)[code] = () => ({

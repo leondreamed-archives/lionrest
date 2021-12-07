@@ -4,29 +4,29 @@ import { createInstance, retrieveModuleProperties } from 'lion-architecture';
 import * as lionrestModules from '../modules';
 import type { InternalLionrestState, Lionrest } from '../types/lionrest';
 import type { InternalLionrestProperties } from '../types/properties';
-import type { BaseRestSchema } from '../types/schema';
+import type { RestSchemaBlueprint } from './schema';
 
 const lionrestProperties = retrieveModuleProperties(
 	lionrestModules
 ) as InternalLionrestProperties<any>;
 
-type CreateLionrestProps<R extends BaseRestSchema> = {
-	schema: R;
+type CreateLionrestProps<B extends RestSchemaBlueprint> = {
+	schema: B;
 	ky: typeof ky;
 };
 
-export function createLionrest<R extends BaseRestSchema>(
-	props: CreateLionrestProps<R>
+export function createLionrest<B extends RestSchemaBlueprint>(
+	props: CreateLionrestProps<B>
 ) {
-	const internalState: InternalLionrestState<R> = {
+	const internalState: InternalLionrestState<B> = {
+		schemaBlueprint: props.schema,
 		ky: props.ky,
-		schema: props.schema,
 	};
 
 	const lionrest = createInstance(
 		lionrestProperties,
 		internalState
-	) as Lionrest<R>;
+	) as Lionrest<B>;
 
 	return lionrest;
 }

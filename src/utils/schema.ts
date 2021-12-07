@@ -24,9 +24,9 @@ export type RestSchemaTypeFromBlueprint<R extends RestSchemaBlueprint> = {
 };
 
 export function defRestSchema<B extends RestSchemaBlueprint>(
-	restSchema: B
-): RestSchemaTypeFromBlueprint<B> {
-	return restSchema;
+	RestSchemaBlueprint: B
+): B {
+	return RestSchemaBlueprint;
 }
 
 export type RouteMethodBlueprint = {

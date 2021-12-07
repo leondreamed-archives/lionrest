@@ -1,17 +1,18 @@
 import type ky from 'ky';
 import type { RemovePrivateProperties } from 'liontypes';
 
-import type { InternalLionrestProperties } from './properties';
-import type { BaseRestSchema } from './schema';
+import type { RestSchemaBlueprint } from '~/utils/schema';
 
-export type InternalLionrestState<R extends BaseRestSchema> = {
+import type { InternalLionrestProperties } from './properties';
+
+export type InternalLionrestState<R extends RestSchemaBlueprint> = {
 	ky: typeof ky;
-	schema: R;
+	schemaBlueprint: R;
 };
 
-export interface InternalLionrest<R extends BaseRestSchema>
+export interface InternalLionrest<R extends RestSchemaBlueprint>
 	extends InternalLionrestState<R>,
 		InternalLionrestProperties<R> {}
 
-export interface Lionrest<R extends BaseRestSchema>
+export interface Lionrest<R extends RestSchemaBlueprint>
 	extends RemovePrivateProperties<InternalLionrest<R>> {}

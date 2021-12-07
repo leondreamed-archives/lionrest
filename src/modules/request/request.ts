@@ -1,6 +1,7 @@
 import ky from 'ky';
 
 import type { TypedResponsePromise } from '~/types/response';
+import type { RestSchemaBlueprint } from '~/utils/schema';
 
 import type {
 	DeleteRoutes,
@@ -11,41 +12,40 @@ import type {
 	RestSchemaUrls,
 	TypedKyOptions,
 } from '../../types/request';
-import type { BaseRestSchema } from '../../types/schema';
 import { useDefineMethods } from '../../utils/methods';
 
-export function requestModule<S extends BaseRestSchema>() {
-	const defineMethods = useDefineMethods<S>();
+export function requestModule<B extends RestSchemaBlueprint>() {
+	const defineMethods = useDefineMethods<B>();
 
 	return defineMethods({
-		get<Url extends RestSchemaUrls<GetRoutes<S>>>(
+		get<Url extends RestSchemaUrls<GetRoutes<B>>>(
 			url: Url,
-			options: TypedKyOptions<S, Url, 'get'>
-		): TypedResponsePromise<S, Url, 'get'> {
+			options: TypedKyOptions<B, Url, 'get'>
+		): TypedResponsePromise<B, Url, 'get'> {
 			return ky.get(url, options);
 		},
-		post<Url extends RestSchemaUrls<PostRoutes<S>>>(
+		post<Url extends RestSchemaUrls<PostRoutes<B>>>(
 			url: Url,
-			options: TypedKyOptions<S, Url, 'post'>
-		): TypedResponsePromise<S, Url, 'post'> {
+			options: TypedKyOptions<B, Url, 'post'>
+		): TypedResponsePromise<B, Url, 'post'> {
 			return ky.post(url, options);
 		},
-		put<Url extends RestSchemaUrls<PutRoutes<S>>>(
+		put<Url extends RestSchemaUrls<PutRoutes<B>>>(
 			url: Url,
-			options: TypedKyOptions<S, Url, 'put'>
-		): TypedResponsePromise<S, Url, 'put'> {
+			options: TypedKyOptions<B, Url, 'put'>
+		): TypedResponsePromise<B, Url, 'put'> {
 			return ky.put(url, options);
 		},
-		patch<Url extends RestSchemaUrls<PatchRoutes<S>>>(
+		patch<Url extends RestSchemaUrls<PatchRoutes<B>>>(
 			url: Url,
-			options: TypedKyOptions<S, Url, 'patch'>
-		): TypedResponsePromise<S, Url, 'patch'> {
+			options: TypedKyOptions<B, Url, 'patch'>
+		): TypedResponsePromise<B, Url, 'patch'> {
 			return ky.patch(url, options);
 		},
-		delete<Url extends RestSchemaUrls<DeleteRoutes<S>>>(
+		delete<Url extends RestSchemaUrls<DeleteRoutes<B>>>(
 			url: Url,
-			options: TypedKyOptions<S, Url, 'delete'>
-		): TypedResponsePromise<S, Url, 'delete'> {
+			options: TypedKyOptions<B, Url, 'delete'>
+		): TypedResponsePromise<B, Url, 'delete'> {
 			return ky.delete(url, options);
 		},
 	});

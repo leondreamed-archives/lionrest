@@ -1,16 +1,21 @@
 import type { ResponsePromise } from 'ky';
 
+import type {
+	RestSchemaBlueprint,
+	RestSchemaTypeFromBlueprint,
+} from '~/utils/schema';
+
 import type { HttpMethod } from './method';
-import type { BaseRestSchema, BaseRouteMethodSchema } from './schema';
+import type { BaseRouteMethodSchema } from './schema';
 
 export type TypedResponsePromise<
-	R extends BaseRestSchema,
+	R extends RestSchemaBlueprint,
 	Url extends string,
 	Method extends HttpMethod
 > = ResponsePromise & {
 	json(): Promise<
-		R[Url][Method] extends BaseRouteMethodSchema
-			? R[Url][Method]['replies']
+		RestSchemaTypeFromBlueprint<R>[Url][Method] extends BaseRouteMethodSchema
+			? RestSchemaTypeFromBlueprint<R>[Url][Method]['replies']
 			: never
 	>;
 };

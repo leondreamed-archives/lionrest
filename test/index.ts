@@ -1,9 +1,10 @@
 import { Type } from '@sinclair/typebox';
+import ky from 'ky';
 
-import { defReply, defRestSchema } from '../src';
+import { createLionrest, defReply, defRestSchema } from '../src';
 import { defNullReply } from '../src/utils/reply';
 
-const mySchema = defRestSchema({
+const schema = defRestSchema({
 	'/route1': {
 		get: {
 			headers: Type.Object({
@@ -25,10 +26,13 @@ const mySchema = defRestSchema({
 				username: Type.String(),
 			}),
 			replies: {
-				failure: defReply<null>().statusCode(403),
+				failure: defNullReply().statusCode(403),
 			},
 		},
 	},
 });
 
-export type MySchema = typeof mySchema;
+createLionrest({
+	ky,
+	schema,
+});

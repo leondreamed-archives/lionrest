@@ -1,5 +1,10 @@
+import type {
+	RestSchemaBlueprint,
+	RestSchemaTypeFromBlueprint,
+} from '~/utils/schema';
+
 import type { HttpMethod } from './method';
-import type { BaseRestSchema, BaseRouteMethodSchema } from './schema';
+import type { BaseRouteMethodSchema } from './schema';
 
 export interface ReplyData<
 	StatusCode extends number,
@@ -36,9 +41,11 @@ export type MapRepliesToReplyCreator<Replies extends BaseReplies> = {
 };
 
 export type ServerRepliesCreator<
-	R extends BaseRestSchema,
+	B extends RestSchemaBlueprint,
 	Url extends string,
 	Method extends HttpMethod
-> = R[Url][Method] extends BaseRouteMethodSchema
-	? MapRepliesToReplyCreator<R[Url][Method]['replies']>
+> = RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseRouteMethodSchema
+	? MapRepliesToReplyCreator<
+			RestSchemaTypeFromBlueprint<B>[Url][Method]['replies']
+	  >
 	: never;
