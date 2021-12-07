@@ -37,7 +37,7 @@ export type RouteMethodBlueprint = {
 	 *		'x-optional-header': Type.Optional(Type.String())
 	 *	})
 	 */
-	headers: TObject<{
+	headers?: TObject<{
 		[header: string]: TString | TOptional<TString>;
 	}>;
 	replies: {
@@ -46,7 +46,7 @@ export type RouteMethodBlueprint = {
 };
 
 export type GetRouteMethodBlueprint = RouteMethodBlueprint & {
-	searchParams: TObject<TProperties>;
+	searchParams?: TObject<TProperties>;
 };
 
 export type NonGetRouteMethodBlueprint = RouteMethodBlueprint & {
