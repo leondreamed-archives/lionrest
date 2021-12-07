@@ -20,6 +20,7 @@ export function createLionrest<R extends BaseRestSchema>(
 ) {
 	const internalState: InternalLionrestState<R> = {
 		ky: props.ky,
+		schema: props.schema,
 	};
 
 	const lionrest = createInstance(

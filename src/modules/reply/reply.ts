@@ -13,18 +13,20 @@ export function replyModule<R extends BaseRestSchema>() {
 			url: Url
 		): ServerRepliesCreator<R, Url, Method> {
 			const serverReplies = {} as ServerRepliesCreator<R, Url, Method>;
-			for (const replyBlueprint of replyBlueprints) {
-				if (replyBlueprint.hasData) {
-					(serverReplies as any)[replyBlueprint.code] = (data: unknown) => ({
-						statusCode: replyBlueprint.statusCode,
-						code: replyBlueprint.code,
-						data,
+			for (const [code, { data, statusCode }] of Object.entries(
+				this.schema[url]![method]!.replies
+			)) {
+				if (data === null) {
+					(serverReplies as any)[code] = () => ({
+						statusCode,
+						code,
+						data: null,
 					});
 				} else {
-					(serverReplies as any)[replyBlueprint.code] = () => ({
-						statusCode: replyBlueprint.statusCode,
-						code: replyBlueprint.code,
-						data: null,
+					(serverReplies as any)[code] = (data: unknown) => ({
+						statusCode,
+						code,
+						data,
 					});
 				}
 			}

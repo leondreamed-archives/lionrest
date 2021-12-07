@@ -7,7 +7,7 @@ import type {
 	TString,
 } from '@sinclair/typebox';
 
-import type { BaseReplies, Reply, ReplyData } from '../types/reply';
+import type { ReplyData } from '../types/reply';
 
 export type RestSchemaTypeFromBlueprint<R extends RestSchemaBlueprint> = {
 	[Route in keyof R]: {
@@ -27,17 +27,6 @@ export function defRestSchema<B extends RestSchemaBlueprint>(
 	restSchema: B
 ): RestSchemaTypeFromBlueprint<B> {
 	return restSchema;
-}
-
-type MapTypedReplies<T extends BaseReplies> = {
-	[R in keyof T & number]: Reply<
-		T[R]['code'],
-		T[R]['statusCode'],
-		T[R]['data']
-	>;
-};
-export function defReplies<R extends BaseReplies>(): MapTypedReplies<R> {
-	return undefined as any;
 }
 
 export type RouteMethodBlueprint = {

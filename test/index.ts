@@ -1,6 +1,7 @@
 import { Type } from '@sinclair/typebox';
 
 import { defReply, defRestSchema } from '../src';
+import { defNullReply } from '../src/utils/reply';
 
 const mySchema = defRestSchema({
 	'/route1': {
@@ -12,7 +13,7 @@ const mySchema = defRestSchema({
 				query: Type.String(),
 			}),
 			replies: {
-				success: defReply<null>().statusCode(200),
+				success: defNullReply().statusCode(200),
 				failure: defReply<{ message: string }>().statusCode(403),
 			},
 		},

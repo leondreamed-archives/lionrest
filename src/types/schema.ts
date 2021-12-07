@@ -40,3 +40,5 @@ export type RouteSchema<Schema extends BaseRouteSchema> = Schema;
 export type BaseRestSchema = {
 	[k: string]: BaseRouteSchema;
 };
+
+export type RestSchema<Schema extends BaseRestSchema> = Schema;

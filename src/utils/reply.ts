@@ -12,3 +12,16 @@ export function defReply<Data extends Record<string, unknown>>() {
 		},
 	};
 }
+
+export function defNullReply() {
+	return {
+		statusCode: function <StatusCode extends number>(
+			statusCode: StatusCode
+		): ReplyData<StatusCode> {
+			return {
+				statusCode,
+				data: null,
+			};
+		},
+	};
+}
