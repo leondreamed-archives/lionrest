@@ -9,15 +9,15 @@ import type {
 
 import type { ReplyData } from '../types/reply';
 
-export type RestSchemaTypeFromBlueprint<R extends RestSchemaBlueprint> = {
-	[Route in keyof R]: {
-		[RouteMethod in keyof R[Route]]: R[Route][RouteMethod] extends RouteMethodBlueprint
-			? Omit<R[Route][RouteMethod], 'headers' | 'searchParams' | 'body'> & {
-					headers: Static<R[Route][RouteMethod]['headers']>;
-			  } & (R[Route][RouteMethod] extends GetRouteMethodBlueprint
-						? { searchParams: Static<R[Route][RouteMethod]['searchParams']> }
-						: R[Route][RouteMethod] extends NonGetRouteMethodBlueprint
-						? { body: Static<R[Route][RouteMethod]['body']> }
+export type RestSchemaTypeFromBlueprint<B extends RestSchemaBlueprint> = {
+	[Route in keyof B]: {
+		[RouteMethod in keyof B[Route]]: B[Route][RouteMethod] extends RouteMethodBlueprint
+			? Omit<B[Route][RouteMethod], 'headers' | 'searchParams' | 'body'> & {
+					headers: Static<B[Route][RouteMethod]['headers']>;
+			  } & (B[Route][RouteMethod] extends GetRouteMethodBlueprint
+						? { searchParams: Static<B[Route][RouteMethod]['searchParams']> }
+						: B[Route][RouteMethod] extends NonGetRouteMethodBlueprint
+						? { body: Static<B[Route][RouteMethod]['body']> }
 						: never)
 			: never;
 	};

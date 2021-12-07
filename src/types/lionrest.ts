@@ -5,14 +5,14 @@ import type { RestSchemaBlueprint } from '~/utils/schema';
 
 import type { InternalLionrestProperties } from './properties';
 
-export type InternalLionrestState<R extends RestSchemaBlueprint> = {
+export type InternalLionrestState<B extends RestSchemaBlueprint> = {
 	ky: typeof ky;
-	schemaBlueprint: R;
+	schemaBlueprint: B;
 };
 
-export interface InternalLionrest<R extends RestSchemaBlueprint>
-	extends InternalLionrestState<R>,
-		InternalLionrestProperties<R> {}
+export interface InternalLionrest<B extends RestSchemaBlueprint>
+	extends InternalLionrestState<B>,
+		InternalLionrestProperties<B> {}
 
-export interface Lionrest<R extends RestSchemaBlueprint>
-	extends RemovePrivateProperties<InternalLionrest<R>> {}
+export interface Lionrest<B extends RestSchemaBlueprint>
+	extends RemovePrivateProperties<InternalLionrest<B>> {}

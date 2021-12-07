@@ -4,12 +4,12 @@ import type { RestSchemaBlueprint } from '~/utils/schema';
 
 import * as lionrestModules from '../modules';
 
-class MW<R extends RestSchemaBlueprint> {
+class MW<B extends RestSchemaBlueprint> {
 	// eslint-disable-next-line class-methods-use-this
 	t() {
 		return lionrestModules['' as keyof typeof lionrestModules]<R>();
 	}
 }
 
-export type InternalLionrestProperties<R extends RestSchemaBlueprint> =
-	UnionToIntersection<ReturnType<MW<R>['t']>>;
+export type InternalLionrestProperties<B extends RestSchemaBlueprint> =
+	UnionToIntersection<ReturnType<MW<B>['t']>>;
