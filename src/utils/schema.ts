@@ -6,7 +6,6 @@ import type {
 	TSchema,
 	TString,
 } from '@sinclair/typebox';
-import { Type } from '@sinclair/typebox';
 
 import type { BaseReply, Reply } from '../types/reply';
 

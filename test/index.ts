@@ -1,3 +1,5 @@
+import { Type } from '@sinclair/typebox';
+
 const mySchema = defRestSchema({
 	'/route1': {
 		get: {

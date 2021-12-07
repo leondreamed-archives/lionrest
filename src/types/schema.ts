@@ -41,39 +41,3 @@ export type RouteSchema<Schema extends BaseRouteSchema> = Schema;
 export type BaseRestSchema = {
 	[k: string]: BaseRouteSchema;
 };
-
-export type RestSchema<Schema extends BaseRestSchema> = Schema;
-
-/**
- *	@example
- *	type MySchema = RestSchema<{
- *		'/route1': {
- *			get: {
- *				searchParams: {
- *					query: string;
- *				};
- *				headers: {
- *					'x-my-header': string;
- *				};
- *				reply: {
- *					code: 'success';
- *					data: null;
- *					statusCode: 200;
- *				};
- *			};
- *			post: {
- *				body: {
- *					username: string,
- *				},
- *				headers: {
- *					'x-my-header': string,
- *				},
- *				reply: {
- *					code: 'failure',
- *					data: null,
- *					statusCode: 403
- *				}
- *			};
- *		};
- *	}>;
- */

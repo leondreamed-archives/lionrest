@@ -32,8 +32,8 @@ export type RestSchemaUrls<R extends BaseRestSchema> = keyof R & string;
 
 export type TypedKyOptions<
 	R extends BaseRestSchema,
-	Method extends HttpMethod,
-	Url extends RestSchemaUrls<R>
+	Url extends RestSchemaUrls<R>,
+	Method extends HttpMethod
 > = Options &
 	(R[Url][Method] extends BaseRouteMethodSchema
 		? R[Url][Method] extends BaseGetSchema
