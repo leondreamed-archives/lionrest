@@ -1,4 +1,4 @@
-import type { ReplyBlueprint, ServerRepliesCreator } from './types';
+import type { ReplyBlueprint, ServerRepliesCreator } from '../types/reply';
 
 /**
  * Example:

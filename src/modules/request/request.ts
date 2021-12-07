@@ -1,17 +1,13 @@
 import ky from 'ky';
 
-import type { RestSchema } from '../../types/rest';
+import type { BaseRestSchema } from '../../types/schema';
 import { useDefineMethods } from '../../utils/methods';
 
-export function requestModule<S extends RestSchema>() {
+export function requestModule<S extends BaseRestSchema>() {
 	const defineMethods = useDefineMethods<S>();
 
 	return defineMethods({
-		get: function <U extends RestSchema>(url, options) {
-			return ky.get(url, {
-
-			});
-		},
+		get(url, options) {},
 		post(url, options) {
 			return ky.post(url, options);
 		},

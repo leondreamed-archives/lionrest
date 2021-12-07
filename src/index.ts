@@ -1,3 +1,3 @@
-function createLionrest<S extends RestSchema>() {
+import type { BaseRestSchema } from './types/schema';
 
-}
+function createLionrest<R extends BaseRestSchema>() {}

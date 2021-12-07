@@ -1,13 +1,13 @@
 import type { RemovePrivateProperties } from 'liontypes';
 
 import type { InternalLionrestProperties } from './properties';
-import type { RestSchema } from './rest';
+import type { BaseRestSchema } from './schema';
 
-export type InternalLionrestState<_R extends RestSchema> = {};
+export type InternalLionrestState<_R extends BaseRestSchema> = {};
 
-export interface InternalLionrest<R extends RestSchema>
+export interface InternalLionrest<R extends BaseRestSchema>
 	extends InternalLionrestState<R>,
 		InternalLionrestProperties<R> {}
 
-export interface Lionecs<S extends RestSchema>
-	extends RemovePrivateProperties<InternalLionrest<S>> {}
+export interface Lionrest<R extends BaseRestSchema>
+	extends RemovePrivateProperties<InternalLionrest<R>> {}

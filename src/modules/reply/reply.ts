@@ -1,8 +1,10 @@
-import type { RestSchema } from '../../types/rest';
+import type { BaseRestSchema } from '../../types/schema';
 import { useDefineMethods } from '../../utils/methods';
 
-export function replyModule<R extends RestSchema>() {
+export function replyModule<R extends BaseRestSchema>() {
 	const defineMethods = useDefineMethods<R>();
 
-	return defineMethods({});
+	return defineMethods({
+		a() {}
+	});
 }

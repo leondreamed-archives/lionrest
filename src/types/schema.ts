@@ -1,10 +1,8 @@
+import type { Reply } from './reply';
+
 type BaseHeaders = Record<string, string>;
 type BaseSearchParams = Record<string, string>;
-type BaseReply = {
-	code: string;
-	statusCode: number;
-	data: Record<string, unknown> | null;
-};
+type BaseReply = Reply<string, number, Record<string, unknown> | null>;
 type BaseBody = Record<string, unknown>;
 
 export type BaseGetSchema = {
@@ -43,7 +41,8 @@ export type BaseRestSchema = {
 	[k: string]: BaseRouteSchema;
 };
 
-export type RestSchema<Schema extends BaseRestSchema = any> = Schema;
+export type RestSchema<Schema extends BaseRestSchema> = Schema;
+
 
 /**
  *	@example
@@ -77,6 +76,4 @@ export type RestSchema<Schema extends BaseRestSchema = any> = Schema;
  *			};
  *		};
  *	}>;
-*/
-
-export function createLionrest<R extends RestSchema<any>>() {}
+ */
