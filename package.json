@@ -23,7 +23,7 @@
 		"@leonzalion/markdownlint-config": "latest",
 		"@leonzalion/prettier-config": "latest",
 		"@leonzalion/tsconfig": "latest",
-		"@types/node": "^16.11.11",
+		"@types/node": "^16.11.12",
 		"eslint": "^8.4.1",
 		"execa": "^6.0.0",
 		"husky": "^7.0.4",

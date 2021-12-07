@@ -1,11 +1,8 @@
-import type { ComponentMap } from '~/types/component';
+import type { InternalLionrest } from '../types/lionrest';
+import type { RestSchema } from '../types/rest';
 
-import type { InternalLionecs, LionecsExtras, RestSchema } from '../types/rest';
-
-export function useDefineMethods<S extends RestSchema>() {
-	return function defineMethods<F>(
-		methods: F & ThisType<InternalLionecs<M, X> & X>
-	) {
+export function useDefineMethods<R extends RestSchema>() {
+	return function defineMethods<F>(methods: F & ThisType<InternalLionrest<R>>) {
 		// Removing the `this` type from the function
 		return methods as unknown as F;
 	};

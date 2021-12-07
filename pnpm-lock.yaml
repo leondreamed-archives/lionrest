@@ -7,7 +7,7 @@ specifiers:
   '@leonzalion/markdownlint-config': latest
   '@leonzalion/prettier-config': latest
   '@leonzalion/tsconfig': latest
-  '@types/node': ^16.11.11
+  '@types/node': ^16.11.12
   eslint: ^8.4.1
   execa: ^6.0.0
   husky: ^7.0.4
@@ -27,13 +27,13 @@ devDependencies:
   '@leonzalion/markdownlint-config': 1.0.0
   '@leonzalion/prettier-config': 1.0.2_prettier@2.5.1
   '@leonzalion/tsconfig': 1.0.4
-  '@types/node': 16.11.11
+  '@types/node': 16.11.12
   eslint: 8.4.1
   execa: 6.0.0
   husky: 7.0.4
   lint-staged: 12.1.2
   prettier: 2.5.1
-  ts-node: 10.4.0_68212d3c5f342a0c59715bbaaf1875e7
+  ts-node: 10.4.0_d1ba71cee4528a43e185cc3d6fa907dc
   typescript: 4.5.2
 
 packages:
@@ -564,8 +564,8 @@ packages:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
-  /@types/node/16.11.11:
-    resolution: {integrity: sha512-KB0sixD67CeecHC33MYn+eYARkqTheIRNuu97y2XMjR7Wu3XibO1vaY6VBV6O/a89SPI81cEUIYT87UqUWlZNw==}
+  /@types/node/16.11.12:
+    resolution: {integrity: sha512-+2Iggwg7PxoO5Kyhvsq9VarmPbIelXP070HMImEpbtGCoyWNINQj4wzjbQCXzdHTRXnqufutJb5KAURZANNBAw==}
     dev: true
 
   /@types/normalize-package-data/2.4.1:
@@ -2957,7 +2957,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /ts-node/10.4.0_68212d3c5f342a0c59715bbaaf1875e7:
+  /ts-node/10.4.0_d1ba71cee4528a43e185cc3d6fa907dc:
     resolution: {integrity: sha512-g0FlPvvCXSIO1JDF6S232P5jPYqBkRL9qly81ZgAOSU7rwI0stphCgd2kLiCrU9DjQCrJMWEqcNSjQL02s6d8A==}
     hasBin: true
     peerDependencies:
@@ -2976,7 +2976,7 @@ packages:
       '@tsconfig/node12': 1.0.9
       '@tsconfig/node14': 1.0.1
       '@tsconfig/node16': 1.0.2
-      '@types/node': 16.11.11
+      '@types/node': 16.11.12
       acorn: 8.6.0
       acorn-walk: 8.2.0
       arg: 4.1.3

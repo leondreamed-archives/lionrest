@@ -1,3 +1,5 @@
+import type { ReplyBlueprint, ServerRepliesCreator } from './types';
+
 /**
  * Example:
  * replyBlueprints: [ServerReply<'invalid', 403>, ServerReply<'success', 200, { token: string }>]
@@ -14,7 +16,7 @@
  *   })
  * }
  */
-function defReplyCreator<
+export function defReplyCreator<
 	ReplyBlueprints extends ReplyBlueprint<string, number, unknown>[]
 >(replyBlueprints: ReplyBlueprints): ServerRepliesCreator<ReplyBlueprints> {
 	const serverReplies = {} as ServerRepliesCreator<ReplyBlueprints>;
@@ -36,12 +38,12 @@ function defReplyCreator<
 	return serverReplies;
 }
 
-function defReply<Code extends string, StatusCode extends number>(
+export function defReply<Code extends string, StatusCode extends number>(
 	code: Code,
 	statusCode: StatusCode
 ) {
 	return {
-		data<Data extends unknown>(): ReplyBlueprint<Code, StatusCode, Data> {
+		data<Data>(): ReplyBlueprint<Code, StatusCode, Data> {
 			return {
 				code,
 				statusCode,
