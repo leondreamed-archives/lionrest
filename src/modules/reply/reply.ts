@@ -8,7 +8,7 @@ export function replyModule<R extends BaseRestSchema>() {
 	const defineMethods = useDefineMethods<R>();
 
 	return defineMethods({
-		getReplyCreator: function <Method extends HttpMethod, Url extends string>(
+		useReplyCreator: function <Method extends HttpMethod, Url extends string>(
 			method: Method,
 			url: Url
 		): ServerRepliesCreator<R, Url, Method> {
