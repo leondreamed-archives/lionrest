@@ -1,6 +1,14 @@
 {
 	"extends": "@leonzalion/tsconfig/tsconfig.json",
+	"compilerOptions": {
+		"rootDir": ".",
+		"paths": {
+			"~/*": [
+				"./src/*"
+			],
+		}
+	},
 	"include": [
 		"./src"
-	]
+	],
 }

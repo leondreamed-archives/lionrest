@@ -1,15 +1,33 @@
-import { Type, Static } from 'typebox';
+import type {
+	Static,
+	TObject,
+	TOptional,
+	TProperties,
+	TSchema,
+	TString,
+} from '@sinclair/typebox';
+import { Type } from '@sinclair/typebox';
 
 import type { BaseReply, Reply } from '../types/reply';
-import type { BaseRestSchema, BaseRouteSchema } from '../types/schema';
-import { defReply } from './reply';
 
-export function defRestSchema<R extends BaseRestSchema>(restSchema: R) {
+export type RestSchemaTypeFromBlueprint<R extends RestSchemaBlueprint> = {
+	[Route in keyof R]: {
+		[RouteMethod in keyof R[Route]]: R[Route][RouteMethod] extends RouteMethodBlueprint
+			? Omit<R[Route][RouteMethod], 'headers' | 'searchParams' | 'body'> & {
+					headers: Static<R[Route][RouteMethod]['headers']>;
+			  } & (R[Route][RouteMethod] extends GetRouteMethodBlueprint
+						? { searchParams: Static<R[Route][RouteMethod]['searchParams']> }
+						: R[Route][RouteMethod] extends NonGetRouteMethodBlueprint
+						? { body: Static<R[Route][RouteMethod]['body']> }
+						: never)
+			: never;
+	};
+};
+
+export function defRestSchema<B extends RestSchemaBlueprint>(
+	restSchema: B
+): RestSchemaTypeFromBlueprint<B> {
 	return restSchema;
-}
-
-export function defRouteSchema<R extends BaseRouteSchema>(): R {
-	return undefined as any;
 }
 
 export function defReply<R extends BaseReply>(): Reply<
@@ -20,43 +38,36 @@ export function defReply<R extends BaseReply>(): Reply<
 	return undefined as any;
 }
 
-export function defBody<B>(body: B): Static<B> {
-	return undefined as any;
-}
+export type RouteMethodBlueprint = {
+	/**
+	 *	@example
+	 *	Type.Object({
+	 *		'x-required-header': Type.String()
+	 *		'x-optional-header': Type.Optional(Type.String())
+	 *	})
+	 */
+	headers: TObject<{
+		[header: string]: TString | TOptional<TString>;
+	}>;
+	reply: BaseReply;
+};
 
-export function defRoute<R extends >
+export type GetRouteMethodBlueprint = RouteMethodBlueprint & {
+	searchParams: TObject<TProperties>;
+};
 
-const mySchema = defRestSchema({
-	'/route1': {
-		get: {
-			headers: {
-				'x-my-header': Type.String(),
-			},
-			searchParams: {
-				query: Type.String(),
-			},
-			reply: defReply<{
-				code: 'success';
-				data: null;
-				statusCode: 200;
-			}>(),
-		},
-		post: {
-			headers: {
-				'x-my-header': Type.String(),
-			},
-			body: defBody(
-				Type.Object({
-					username: Type.String(),
-				})
-			),
-			reply: defReply<{
-				code: 'failure';
-				data: null;
-				statusCode: 403;
-			}>(),
-		},
-	},
-});
+export type NonGetRouteMethodBlueprint = RouteMethodBlueprint & {
+	body: TSchema;
+};
 
-export type MySchema = typeof mySchema;
+export type RouteBlueprint = {
+	get?: GetRouteMethodBlueprint;
+	post?: NonGetRouteMethodBlueprint;
+	put?: NonGetRouteMethodBlueprint;
+	patch?: NonGetRouteMethodBlueprint;
+	delete?: NonGetRouteMethodBlueprint;
+};
+
+export type RestSchemaBlueprint = {
+	[route: string]: RouteBlueprint;
+};
