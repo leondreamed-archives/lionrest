@@ -13,9 +13,11 @@ specifiers:
   husky: ^7.0.4
   ky: ^0.28.7
   lint-staged: ^12.1.2
+  liontypes: ^1.0.2
   prettier: ^2.5.1
   ts-node: ^10.4.0
   typescript: ^4.5.2
+  utility-types: ^3.10.0
 
 dependencies:
   ky: 0.28.7
@@ -32,9 +34,11 @@ devDependencies:
   execa: 6.0.0
   husky: 7.0.4
   lint-staged: 12.1.2
+  liontypes: 1.0.2
   prettier: 2.5.1
   ts-node: 10.4.0_d1ba71cee4528a43e185cc3d6fa907dc
   typescript: 4.5.2
+  utility-types: 3.10.0
 
 packages:
 
@@ -2108,6 +2112,10 @@ packages:
       yaml: 1.10.2
     dev: true
 
+  /liontypes/1.0.2:
+    resolution: {integrity: sha512-zqqWTSDSX8gpB9rCyYDveGaL6WSSaUydw03AYFO/vEAYer4EiEZCUxCKL+f7tVQ0Amcx0yB9mlxQBnEL/5K/LQ==}
+    dev: true
+
   /listr2/3.13.5_enquirer@2.3.6:
     resolution: {integrity: sha512-3n8heFQDSk+NcwBn3CgxEibZGaRzx+pC64n3YjpMD1qguV4nWus3Al+Oo3KooqFKTQEJ1v7MmnbnyyNspgx3NA==}
     engines: {node: '>=10.0.0'}
@@ -3094,6 +3102,11 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
+    dev: true
+
+  /utility-types/3.10.0:
+    resolution: {integrity: sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==}
+    engines: {node: '>= 4'}
     dev: true
 
   /v8-compile-cache/2.3.0:

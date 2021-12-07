@@ -10,5 +10,5 @@ class MW<R extends RestSchema> {
 	}
 }
 
-export type InternalLionecsProperties<R extends RestSchema> =
+export type InternalLionrestProperties<R extends RestSchema> =
 	UnionToIntersection<ReturnType<MW<R>['t']>>;
