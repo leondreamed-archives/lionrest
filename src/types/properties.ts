@@ -7,7 +7,7 @@ import * as lionrestModules from '../modules';
 class MW<B extends RestSchemaBlueprint> {
 	// eslint-disable-next-line class-methods-use-this
 	t() {
-		return lionrestModules['' as keyof typeof lionrestModules]<R>();
+		return lionrestModules['' as keyof typeof lionrestModules]<B>();
 	}
 }
 
