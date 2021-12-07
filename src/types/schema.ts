@@ -5,16 +5,17 @@ type BaseSearchParams = Record<string, string>;
 type BaseReply = Reply<string, number, Record<string, unknown> | null>;
 type BaseBody = Record<string, unknown>;
 
-export type BaseGetSchema = {
+export type BaseRouteMethodSchema = {
 	headers: BaseHeaders;
-	searchParams: BaseSearchParams;
 	reply: BaseReply;
 };
 
-export type BaseNonGetSchema = {
-	headers: BaseHeaders;
+export type BaseGetSchema = BaseRouteMethodSchema & {
+	searchParams: BaseSearchParams;
+};
+
+export type BaseNonGetSchema = BaseRouteMethodSchema & {
 	body: BaseBody;
-	reply: BaseReply;
 };
 
 export type BasePostSchema = BaseNonGetSchema;
@@ -42,7 +43,6 @@ export type BaseRestSchema = {
 };
 
 export type RestSchema<Schema extends BaseRestSchema> = Schema;
-
 
 /**
  *	@example

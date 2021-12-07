@@ -8,7 +8,7 @@ export function defRouteSchema<R extends BaseRouteSchema>(): R {
 	return undefined as any;
 }
 
-defRestSchema({
+export const mySchema = defRestSchema({
 	'/route1': defRouteSchema<{
 		get: {
 			searchParams: {
@@ -38,3 +38,4 @@ defRestSchema({
 		};
 	}>(),
 });
+export type MySchema = typeof mySchema;
