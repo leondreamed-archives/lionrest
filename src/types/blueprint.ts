@@ -15,6 +15,7 @@ export type RouteMethodBlueprintHeaders = TObject<{
 
 export type RouteMethodBlueprintSearchParams = TObject<TProperties>;
 export type RouteMethodBlueprintUrlParams = Record<string, unknown>;
+export type RouteMethodBlueprintBody = TSchema;
 
 export type RouteMethodBlueprint = {
 	/**
@@ -36,7 +37,7 @@ export type GetRouteMethodBlueprint = RouteMethodBlueprint & {
 };
 
 export type NonGetRouteMethodBlueprint = RouteMethodBlueprint & {
-	body: TSchema;
+	body: RouteMethodBlueprintBody;
 };
 
 export type RouteBlueprint = {

@@ -3,6 +3,7 @@ import type { Options } from 'ky';
 import type {
 	RestSchemaBlueprint,
 	RestSchemaTypeFromBlueprint,
+	RouteMethodBlueprintBody,
 	RouteMethodBlueprintHeaders,
 	RouteMethodBlueprintSearchParams,
 	RouteMethodBlueprintUrlParams,
@@ -12,6 +13,7 @@ import type {
 	BaseGetSchema,
 	BaseNonGetSchema,
 	BaseRouteMethodSchema,
+	UrlParam,
 } from './schema';
 
 export type GetRoutes<B extends RestSchemaBlueprint> = {
@@ -40,8 +42,9 @@ export type TypedKyOptions<
 	B extends RestSchemaBlueprint,
 	Url extends RestSchemaUrls<B>,
 	Method extends HttpMethod
-> = Options &
-	(RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseRouteMethodSchema
+> = Options & {
+	urlParams?: Record<string, UrlParam>;
+} & (RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseRouteMethodSchema
 		? RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseGetSchema
 			? {
 					method?: 'GET';
@@ -69,9 +72,20 @@ export type TypedKyOptions<
 			: RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseNonGetSchema
 			? {
 					method?: Uppercase<Method>;
-					headers: RestSchemaTypeFromBlueprint<B>[Url][Method]['headers'];
-					body: RestSchemaTypeFromBlueprint<B>[Url][Method]['body'];
+			  } & (RestSchemaTypeFromBlueprint<B>[Url][Method] extends {
+					headers: RouteMethodBlueprintHeaders;
 			  }
+					? {
+							headers: RestSchemaTypeFromBlueprint<B>[Url][Method]['headers'];
+					  }
+					: Record<never, never>) &
+					(RestSchemaTypeFromBlueprint<B>[Url][Method] extends {
+						body: RouteMethodBlueprintBody;
+					}
+						? {
+								body: RestSchemaTypeFromBlueprint<B>[Url][Method]['body'];
+						  }
+						: Record<never, never>)
 			: never
 		: never);
 
