@@ -1,7 +1,7 @@
 import type { RestSchemaBlueprint } from '~/types/blueprint';
 import type { HttpMethod } from '~/types/method';
 import type { ServerRepliesCreator } from '~/types/reply';
-import type { MethodRoutes, RestSchemaUrls } from '~/types/request';
+import type { RestSchemaUrls } from '~/types/request';
 
 import { useDefineMethods } from '../../utils/methods';
 
@@ -11,7 +11,7 @@ export function replyModule<B extends RestSchemaBlueprint>() {
 	return defineMethods({
 		useReplyCreator: function <
 			Method extends HttpMethod,
-			Url extends RestSchemaUrls<MethodRoutes<B, Method>>
+			Url extends RestSchemaUrls<B>
 		>(method: Method, url: Url): ServerRepliesCreator<B, Url, Method> {
 			const serverReplies = {} as ServerRepliesCreator<B, Url, Method>;
 			for (const [code, { data, statusCode }] of Object.entries(
