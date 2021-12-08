@@ -1,6 +1,6 @@
+import type { RestSchemaBlueprint } from '~/types/blueprint';
 import type { HttpMethod } from '~/types/method';
 import type { ServerRepliesCreator } from '~/types/reply';
-import type { RestSchemaBlueprint } from '~/utils/schema';
 
 import { useDefineMethods } from '../../utils/methods';
 

@@ -1,8 +1,7 @@
 import type {
 	RestSchemaBlueprint,
 	RestSchemaTypeFromBlueprint,
-} from '~/utils/schema';
-
+} from './blueprint';
 import type { HttpMethod } from './method';
 import type { BaseRouteMethodSchema } from './schema';
 
@@ -22,19 +21,19 @@ export interface Reply<
 	code: Code;
 }
 
-export type BaseReplies = Reply<string, number, unknown | null>[];
+export type BaseReplyMap = Record<string, ReplyData<number, unknown | null>>;
 
-export type MapRepliesToReplyCreator<Replies extends BaseReplies> = {
-	[R in keyof Replies & number]: Replies[R]['data'] extends null
+export type MapRepliesToReplyCreator<Replies extends BaseReplyMap> = {
+	[R in keyof Replies]: Replies[R]['data'] extends null
 		? () => {
-				code: Replies[R]['code'];
+				code: R;
 				statusCode: Replies[R]['statusCode'];
 				data: null;
 		  }
 		: <D extends Replies[R]['data']>(
 				data: D
 		  ) => {
-				code: Replies[R]['code'];
+				code: R;
 				statusCode: Replies[R]['statusCode'];
 				data: D;
 		  };

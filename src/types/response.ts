@@ -3,8 +3,7 @@ import type { ResponsePromise } from 'ky';
 import type {
 	RestSchemaBlueprint,
 	RestSchemaTypeFromBlueprint,
-} from '~/utils/schema';
-
+} from './blueprint';
 import type { HttpMethod } from './method';
 import type { BaseRouteMethodSchema } from './schema';
 

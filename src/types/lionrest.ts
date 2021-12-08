@@ -1,8 +1,7 @@
 import type ky from 'ky';
 import type { RemovePrivateProperties } from 'liontypes';
 
-import type { RestSchemaBlueprint } from '~/utils/schema';
-
+import type { RestSchemaBlueprint } from './blueprint';
 import type { InternalLionrestProperties } from './properties';
 
 export type InternalLionrestState<B extends RestSchemaBlueprint> = {

@@ -1,8 +1,7 @@
 import type { UnionToIntersection } from 'utility-types';
 
-import type { RestSchemaBlueprint } from '~/utils/schema';
-
 import * as lionrestModules from '../modules';
+import type { RestSchemaBlueprint } from './blueprint';
 
 class MW<B extends RestSchemaBlueprint> {
 	// eslint-disable-next-line class-methods-use-this

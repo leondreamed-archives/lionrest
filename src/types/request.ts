@@ -3,8 +3,10 @@ import type { Options } from 'ky';
 import type {
 	RestSchemaBlueprint,
 	RestSchemaTypeFromBlueprint,
-} from '~/utils/schema';
-
+	RouteMethodBlueprintHeaders,
+	RouteMethodBlueprintSearchParams,
+	RouteMethodBlueprintUrlParams,
+} from './blueprint';
 import type { HttpMethod } from './method';
 import type {
 	BaseGetSchema,
@@ -42,15 +44,55 @@ export type TypedKyOptions<
 	(RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseRouteMethodSchema
 		? RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseGetSchema
 			? {
-					method: 'GET';
-					headers: RestSchemaTypeFromBlueprint<B>[Url][Method]['headers'];
-					searchParams: RestSchemaTypeFromBlueprint<B>[Url][Method]['searchParams'];
+					method?: 'GET';
+			  } & (RestSchemaTypeFromBlueprint<B>[Url][Method] extends {
+					headers: RouteMethodBlueprintHeaders;
 			  }
+					? {
+							headers: RestSchemaTypeFromBlueprint<B>[Url][Method]['headers'];
+					  }
+					: Record<never, never>) &
+					(RestSchemaTypeFromBlueprint<B>[Url][Method] extends {
+						searchParams: RouteMethodBlueprintSearchParams;
+					}
+						? {
+								searchParams: RestSchemaTypeFromBlueprint<B>[Url][Method]['searchParams'];
+						  }
+						: Record<never, never>) &
+					(RestSchemaTypeFromBlueprint<B>[Url][Method] extends {
+						urlParams: RouteMethodBlueprintUrlParams;
+					}
+						? {
+								searchParams: RestSchemaTypeFromBlueprint<B>[Url][Method]['searchParams'];
+						  }
+						: Record<never, never>)
 			: RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseNonGetSchema
 			? {
-					method: Uppercase<Method>;
+					method?: Uppercase<Method>;
 					headers: RestSchemaTypeFromBlueprint<B>[Url][Method]['headers'];
 					body: RestSchemaTypeFromBlueprint<B>[Url][Method]['body'];
 			  }
 			: never
 		: never);
+
+export type AreKyOptionsOptional<
+	B extends RestSchemaBlueprint,
+	Url extends RestSchemaUrls<B>,
+	Method extends HttpMethod
+> = RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseRouteMethodSchema
+	? RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseGetSchema
+		?
+				| RestSchemaTypeFromBlueprint<B>[Url][Method]['headers']
+				| RestSchemaTypeFromBlueprint<B>[Url][Method]['searchParams']
+				| RestSchemaTypeFromBlueprint<B>[Url][Method]['urlParams'] extends undefined
+			? true
+			: false
+		: RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseNonGetSchema
+		?
+				| RestSchemaTypeFromBlueprint<B>[Url][Method]['headers']
+				| RestSchemaTypeFromBlueprint<B>[Url][Method]['body']
+				| RestSchemaTypeFromBlueprint<B>[Url][Method]['urlParams'] extends undefined
+			? true
+			: false
+		: never
+	: never;

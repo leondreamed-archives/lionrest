@@ -1,14 +1,14 @@
-import type { BaseReplies } from './reply';
+import type { BaseReplyMap } from './reply';
 
 export type BaseHeaders = Record<string, string>;
 export type BaseSearchParams = Record<string, string>;
 export type BaseBody = Record<string, unknown>;
-export type BaseUrlParams = Record<string, string | number>;
+export type BaseUrlParams = Record<string, UrlParam<string | number>>;
 export interface UrlParam<_T extends string | number> {}
 
 export type BaseRouteMethodSchema = {
 	headers?: BaseHeaders;
-	replies?: BaseReplies;
+	replies?: BaseReplyMap;
 	urlParams?: BaseUrlParams;
 };
 
