@@ -97,5 +97,6 @@ const lr = createLionrest({
 });
 
 test('creates', async () => {
-	console.log(await lr.get('/posts/{id}', { urlParams: { id: 1 } }).json());
+	const post = await lr.get('/posts/{id}', { urlParams: { id: 1 } }).json();
+	expect(post.id).toBe(1);
 });

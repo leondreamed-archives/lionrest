@@ -1,4 +1,5 @@
 import type { ResponsePromise } from 'ky';
+import type { $Values } from 'utility-types';
 
 import type {
 	RestSchemaBlueprint,
@@ -11,10 +12,10 @@ export type TypedResponsePromise<
 	B extends RestSchemaBlueprint,
 	Url extends string,
 	Method extends HttpMethod
-> = ResponsePromise & {
+> = Omit<ResponsePromise, 'json'> & {
 	json(): Promise<
 		RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseRouteMethodSchema
-			? RestSchemaTypeFromBlueprint<B>[Url][Method]['replies']
+			? $Values<RestSchemaTypeFromBlueprint<B>[Url][Method]['replies']>['data']
 			: never
 	>;
 };
