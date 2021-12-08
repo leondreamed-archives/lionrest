@@ -13,7 +13,7 @@ const lionrestProperties = retrieveModuleProperties(
 
 type CreateLionrestProps<B extends RestSchemaBlueprint> = {
 	schema: B;
-	ky: typeof ky;
+	ky?: typeof ky;
 };
 
 export function createLionrest<B extends RestSchemaBlueprint>(

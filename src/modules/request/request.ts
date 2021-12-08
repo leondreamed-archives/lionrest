@@ -29,6 +29,12 @@ export function requestModule<B extends RestSchemaBlueprint>() {
 	}
 
 	return defineMethods({
+		_getKy() {
+			if (this.ky === undefined) {
+				throw new Error('A ky client was not passed to Lionrest.');
+			}
+			return this.ky;
+		},
 		get<Url extends RestSchemaUrls<GetRoutes<B>>>(
 			url: Url,
 			...options: AreKyOptionsOptional<B, Url, 'get'> extends true
@@ -36,7 +42,7 @@ export function requestModule<B extends RestSchemaBlueprint>() {
 				: [options: TypedKyOptions<B, Url, 'get'>]
 		): TypedResponsePromise<B, Url, 'get'> {
 			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this.ky.get(newUrl, options[0]);
+			return this._getKy().get(newUrl, options[0]);
 		},
 		post<Url extends RestSchemaUrls<PostRoutes<B>>>(
 			url: Url,
@@ -45,7 +51,7 @@ export function requestModule<B extends RestSchemaBlueprint>() {
 				: [options: TypedKyOptions<B, Url, 'post'>]
 		): TypedResponsePromise<B, Url, 'post'> {
 			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this.ky.post(newUrl, options[0]);
+			return this._getKy().post(newUrl, options[0]);
 		},
 		put<Url extends RestSchemaUrls<PutRoutes<B>>>(
 			url: Url,
@@ -54,7 +60,7 @@ export function requestModule<B extends RestSchemaBlueprint>() {
 				: [options: TypedKyOptions<B, Url, 'put'>]
 		): TypedResponsePromise<B, Url, 'put'> {
 			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this.ky.put(newUrl, options[0]);
+			return this._getKy().put(newUrl, options[0]);
 		},
 		patch<Url extends RestSchemaUrls<PatchRoutes<B>>>(
 			url: Url,
@@ -63,7 +69,7 @@ export function requestModule<B extends RestSchemaBlueprint>() {
 				: [options: TypedKyOptions<B, Url, 'patch'>]
 		): TypedResponsePromise<B, Url, 'patch'> {
 			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this.ky.patch(newUrl, options[0]);
+			return this._getKy().patch(newUrl, options[0]);
 		},
 		delete<Url extends RestSchemaUrls<DeleteRoutes<B>>>(
 			url: Url,
@@ -72,7 +78,7 @@ export function requestModule<B extends RestSchemaBlueprint>() {
 				: [options: TypedKyOptions<B, Url, 'delete'>]
 		): TypedResponsePromise<B, Url, 'delete'> {
 			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this.ky.delete(newUrl, options[0]);
+			return this._getKy().delete(newUrl, options[0]);
 		},
 	});
 }

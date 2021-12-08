@@ -5,7 +5,7 @@ import type { RestSchemaBlueprint } from './blueprint';
 import type { InternalLionrestProperties } from './properties';
 
 export type InternalLionrestState<B extends RestSchemaBlueprint> = {
-	ky: typeof ky;
+	ky?: typeof ky;
 	schemaBlueprint: B;
 };
 
