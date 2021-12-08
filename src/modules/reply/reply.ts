@@ -41,13 +41,17 @@ export function replyModule<B extends RestSchemaBlueprint>() {
 			method: Method,
 			url: Url
 		): ServerRepliesCreator<B, Url, Method> & {
-			method: Uppercase<HttpMethod>;
-			url: Url;
+			route: {
+				method: Uppercase<HttpMethod>;
+				url: Url;
+			};
 		} {
 			const routeCreator = this.useRouteCreator(method, url);
 			return Object.assign(routeCreator, {
-				method: method.toUpperCase() as Uppercase<HttpMethod>,
-				url,
+				route: {
+					method: method.toUpperCase() as Uppercase<HttpMethod>,
+					url,
+				},
 			});
 		},
 	});
