@@ -91,12 +91,12 @@ const apiKy = ky.extend({
 	prefixUrl: 'https://jsonplaceholder.typicode.com',
 });
 
-const lr = createLionrest({
+const rest = createLionrest({
 	ky: apiKy,
 	schema,
 });
 
-test('creates', async () => {
-	const post = await lr.get('/posts/{id}', { urlParams: { id: 1 } }).json();
+test('successfully retrieves data', async () => {
+	const post = await rest.get('/posts/{id}', { urlParams: { id: 1 } }).json();
 	expect(post.id).toBe(1);
 });
