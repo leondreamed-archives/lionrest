@@ -11,8 +11,7 @@ import type { Static } from '@sinclair/typebox';
 import { Type } from '@sinclair/typebox';
 import ky from 'ky';
 
-import { createLionrest, defReply, defRestSchema } from '~/index';
-import { defNullReply, defUrlParam } from '~/utils/reply';
+import { createLionrest, defReply, defRestSchema, defNullReply, defUrlParam } from 'lionrest';
 
 const Post = Type.Object({
   id: Type.String(),
