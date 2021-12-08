@@ -44,7 +44,14 @@ export type TypedKyOptions<
 	Method extends HttpMethod
 > = Options & {
 	urlParams?: Record<string, UrlParam>;
-} & (RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseRouteMethodSchema
+} & (RestSchemaTypeFromBlueprint<B>[Url] extends {
+		urlParams: RouteMethodBlueprintUrlParams;
+	}
+		? {
+				urlParams: RestSchemaTypeFromBlueprint<B>[Url]['urlParams'];
+		  }
+		: Record<never, never>) &
+	(RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseRouteMethodSchema
 		? RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseGetSchema
 			? {
 					method?: 'GET';
@@ -60,13 +67,6 @@ export type TypedKyOptions<
 					}
 						? {
 								searchParams: RestSchemaTypeFromBlueprint<B>[Url][Method]['searchParams'];
-						  }
-						: Record<never, never>) &
-					(RestSchemaTypeFromBlueprint<B>[Url][Method] extends {
-						urlParams: RouteMethodBlueprintUrlParams;
-					}
-						? {
-								urlParams: RestSchemaTypeFromBlueprint<B>[Url][Method]['urlParams'];
 						  }
 						: Record<never, never>)
 			: RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseNonGetSchema
@@ -97,15 +97,13 @@ export type AreKyOptionsOptional<
 	? RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseGetSchema
 		?
 				| RestSchemaTypeFromBlueprint<B>[Url][Method]['headers']
-				| RestSchemaTypeFromBlueprint<B>[Url][Method]['searchParams']
-				| RestSchemaTypeFromBlueprint<B>[Url][Method]['urlParams'] extends undefined
+				| RestSchemaTypeFromBlueprint<B>[Url][Method]['searchParams'] extends undefined
 			? true
 			: false
 		: RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseNonGetSchema
 		?
 				| RestSchemaTypeFromBlueprint<B>[Url][Method]['headers']
-				| RestSchemaTypeFromBlueprint<B>[Url][Method]['body']
-				| RestSchemaTypeFromBlueprint<B>[Url][Method]['urlParams'] extends undefined
+				| RestSchemaTypeFromBlueprint<B>[Url][Method]['body'] extends undefined
 			? true
 			: false
 		: never

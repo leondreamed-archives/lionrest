@@ -9,7 +9,6 @@ export type UrlParam = string | number;
 export type BaseRouteMethodSchema = {
 	headers?: BaseHeaders;
 	replies?: BaseReplyMap;
-	urlParams?: BaseUrlParams;
 };
 
 export type BaseGetSchema = BaseRouteMethodSchema & {
@@ -31,6 +30,7 @@ export type PatchSchema<Schema extends BasePatchSchema> = Schema;
 export type DeleteSchema<Schema extends BaseDeleteSchema> = Schema;
 
 export type BaseRouteSchema = {
+	urlParams?: BaseUrlParams;
 	get?: BaseGetSchema;
 	post?: BasePostSchema;
 	put?: BasePutSchema;

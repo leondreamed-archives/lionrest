@@ -26,7 +26,6 @@ export type RouteMethodBlueprint = {
 	 *	})
 	 */
 	headers?: RouteMethodBlueprintHeaders;
-	urlParams?: RouteMethodBlueprintUrlParams;
 	replies: {
 		[replyCode: string]: ReplyData<number, unknown>;
 	};
@@ -37,10 +36,11 @@ export type GetRouteMethodBlueprint = RouteMethodBlueprint & {
 };
 
 export type NonGetRouteMethodBlueprint = RouteMethodBlueprint & {
-	body: RouteMethodBlueprintBody;
+	body?: RouteMethodBlueprintBody;
 };
 
 export type RouteBlueprint = {
+	urlParams?: RouteMethodBlueprintUrlParams;
 	get?: GetRouteMethodBlueprint;
 	post?: NonGetRouteMethodBlueprint;
 	put?: NonGetRouteMethodBlueprint;
@@ -72,8 +72,10 @@ export type RestSchemaTypeFromBlueprint<B extends RestSchemaBlueprint> = {
 							  }
 							: Record<never, never>
 						: B[Route][RouteMethod] extends NonGetRouteMethodBlueprint
-						? { body: Static<B[Route][RouteMethod]['body']> }
+						? B[Route][RouteMethod] extends { body: RouteMethodBlueprintBody }
+							? { body: Static<B[Route][RouteMethod]['body']> }
+							: Record<never, never>
 						: never)
-			: never;
+			: B[Route][RouteMethod];
 	};
 };
