@@ -42,14 +42,14 @@ export function replyModule<B extends RestSchemaBlueprint>() {
 			url: Url
 		): ServerRepliesCreator<B, Url, Method> & {
 			route: {
-				method: Uppercase<HttpMethod>;
+				method: Uppercase<Method>;
 				url: Url;
 			};
 		} {
 			const routeCreator = this.useRouteCreator(method, url);
 			return Object.assign(routeCreator, {
 				route: {
-					method: method.toUpperCase() as Uppercase<HttpMethod>,
+					method: method.toUpperCase() as Uppercase<Method>,
 					url,
 				},
 			});
