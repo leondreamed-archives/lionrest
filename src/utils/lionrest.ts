@@ -1,10 +1,11 @@
 import type ky from 'ky';
 import { createInstance, retrieveModuleProperties } from 'lion-architecture';
 
+import type { RestSchemaBlueprint } from '~/types/blueprint';
+
 import * as lionrestModules from '../modules';
 import type { InternalLionrestState, Lionrest } from '../types/lionrest';
 import type { InternalLionrestProperties } from '../types/properties';
-import type { RestSchemaBlueprint } from './schema';
 
 const lionrestProperties = retrieveModuleProperties(
 	lionrestModules

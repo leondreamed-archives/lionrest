@@ -1,5 +1,6 @@
+import type { RestSchemaBlueprint } from '~/types/blueprint';
+
 import type { InternalLionrest } from '../types/lionrest';
-import type { RestSchemaBlueprint } from './schema';
 
 export function useDefineMethods<B extends RestSchemaBlueprint>() {
 	return function defineMethods<F>(methods: F & ThisType<InternalLionrest<B>>) {
