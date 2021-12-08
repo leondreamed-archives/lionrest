@@ -5,6 +5,8 @@ import type {
 	TProperties,
 	TSchema,
 	TString,
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 } from '@sinclair/typebox';
 
 import type { ReplyData } from './reply';

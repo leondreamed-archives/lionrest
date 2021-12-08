@@ -7,7 +7,6 @@ specifiers:
   '@leonzalion/markdownlint-config': latest
   '@leonzalion/prettier-config': latest
   '@leonzalion/tsconfig': latest
-  '@sinclair/typebox': ^0.23.1
   '@types/jest': ^27.0.3
   '@types/node': ^16.11.12
   eslint: ^8.4.1
@@ -38,7 +37,6 @@ devDependencies:
   '@leonzalion/markdownlint-config': 1.0.0
   '@leonzalion/prettier-config': 1.0.2_prettier@2.5.1
   '@leonzalion/tsconfig': 1.0.5
-  '@sinclair/typebox': 0.23.1
   '@types/jest': 27.0.3
   '@types/node': 16.11.12
   eslint: 8.4.1
@@ -889,10 +887,6 @@ packages:
 
   /@rushstack/eslint-patch/1.1.0:
     resolution: {integrity: sha512-JLo+Y592QzIE+q7Dl2pMUtt4q8SKYI5jDrZxrozEQxnGVOyYE+GWK9eLkwTaeN9DDctlaRAQ3TBmzZ1qdLE30A==}
-    dev: true
-
-  /@sinclair/typebox/0.23.1:
-    resolution: {integrity: sha512-XsmyWfps86gFmZhK97HDesbCe/pR+8qf/VveZaADI6oCk0cHGq6WeKdUHM/a8NeSetv/vpUf19ubwU34C2PVWw==}
     dev: true
 
   /@sinonjs/commons/1.8.3:

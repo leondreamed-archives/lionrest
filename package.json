@@ -27,7 +27,6 @@
 		"@leonzalion/markdownlint-config": "latest",
 		"@leonzalion/prettier-config": "latest",
 		"@leonzalion/tsconfig": "latest",
-		"@sinclair/typebox": "^0.23.1",
 		"@types/jest": "^27.0.3",
 		"@types/node": "^16.11.12",
 		"eslint": "^8.4.1",

@@ -16,25 +16,24 @@ import type {
 	UrlParam,
 } from './schema';
 
-export type GetRoutes<B extends RestSchemaBlueprint> = {
-	[K in keyof B as B[K] extends { get: unknown } ? K : never]: B[K];
+export type MethodRoutes<
+	B extends RestSchemaBlueprint,
+	Method extends HttpMethod
+> = {
+	[K in keyof B as B[K] extends { [K in Method]: unknown } ? K : never]: B[K];
 };
 
-export type PostRoutes<B extends RestSchemaBlueprint> = {
-	[K in keyof B as B[K] extends { post: unknown } ? K : never]: B[K];
-};
-
-export type PutRoutes<B extends RestSchemaBlueprint> = {
-	[K in keyof B as B[K] extends { put: unknown } ? K : never]: B[K];
-};
-
-export type PatchRoutes<B extends RestSchemaBlueprint> = {
-	[K in keyof B as B[K] extends { patch: unknown } ? K : never]: B[K];
-};
-
-export type DeleteRoutes<B extends RestSchemaBlueprint> = {
-	[K in keyof B as B[K] extends { delete: unknown } ? K : never]: B[K];
-};
+export type GetRoutes<B extends RestSchemaBlueprint> = MethodRoutes<B, 'get'>;
+export type PostRoutes<B extends RestSchemaBlueprint> = MethodRoutes<B, 'post'>;
+export type PutRoutes<B extends RestSchemaBlueprint> = MethodRoutes<B, 'put'>;
+export type PatchRoutes<B extends RestSchemaBlueprint> = MethodRoutes<
+	B,
+	'patch'
+>;
+export type DeleteRoutes<B extends RestSchemaBlueprint> = MethodRoutes<
+	B,
+	'delete'
+>;
 
 export type RestSchemaUrls<B extends RestSchemaBlueprint> = keyof B & string;
 
