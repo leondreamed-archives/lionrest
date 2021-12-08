@@ -15,8 +15,8 @@ export function defReply<Data>() {
 	};
 }
 
-export function defUrlParam<T extends string | number>(): UrlParam<T> {
-	return true;
+export function defUrlParam<T extends UrlParam>(): T {
+	return undefined as any;
 }
 
 export function defNullReply() {

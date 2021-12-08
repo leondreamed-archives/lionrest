@@ -1,15 +1,4 @@
-import type {
-	Static,
-	TObject,
-	TOptional,
-	TProperties,
-	TSchema,
-	TString,
-} from '@sinclair/typebox';
-
-import type { ReplyData } from '../types/reply';
-
-
+import type { RestSchemaBlueprint } from '~/types/blueprint';
 
 export function defRestSchema<B extends RestSchemaBlueprint>(
 	restSchemaBlueprint: B

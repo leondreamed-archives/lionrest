@@ -63,7 +63,7 @@ export type TypedKyOptions<
 						urlParams: RouteMethodBlueprintUrlParams;
 					}
 						? {
-								searchParams: RestSchemaTypeFromBlueprint<B>[Url][Method]['searchParams'];
+								urlParams: RestSchemaTypeFromBlueprint<B>[Url][Method]['urlParams'];
 						  }
 						: Record<never, never>)
 			: RestSchemaTypeFromBlueprint<B>[Url][Method] extends BaseNonGetSchema

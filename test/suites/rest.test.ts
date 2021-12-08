@@ -1,9 +1,7 @@
 import ky from 'ky';
 
 import { createLionrest, defReply, defRestSchema } from '~/index';
-import type { AreKyOptionsOptional } from '~/types/request';
 import { defUrlParam } from '~/utils/reply';
-import type { RestSchemaTypeFromBlueprint } from '~/utils/schema';
 
 type Todo = {
 	userId: number;
@@ -42,5 +40,5 @@ const lr = createLionrest({
 });
 
 test('creates', async () => {
-	console.log(await lr.get('/todos/{id}').json());
+	console.log(await lr.get('/todos/{id}', { urlParams: { id: 1 } }).json());
 });
