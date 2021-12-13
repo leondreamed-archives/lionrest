@@ -1,15 +1,8 @@
-/* eslint-env node */
+const createAliases = require('@leonzalion/eslint-config/alias');
 
 module.exports = {
 	root: true,
 	extends: ['@leonzalion/eslint-config'],
 	parserOptions: { tsconfigRootDir: __dirname },
-	settings: {
-		'import/resolver': {
-			alias: {
-				map: [['~', './src']],
-				extensions: ['.ts', '.js'],
-			},
-		},
-	},
+	settings: createAliases({ '~': './src' }),
 };
