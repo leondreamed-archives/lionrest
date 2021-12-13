@@ -1,54 +1,69 @@
 {
-	"name": "lionrest",
-	"version": "0.0.2",
-	"main": "dist/index.js",
-	"license": "MIT",
-	"prettier": "@leonzalion/prettier-config",
-	"commitlint": {
-		"extends": [
-			"@commitlint/config-conventional"
-		]
-	},
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"test": "NODE_OPTIONS=--experimental-vm-modules jest",
-		"build": "rimraf dist && tsc && tsc-alias -p tsconfig.json",
-		"prepublish": "pnpm build",
-		"lint": "eslint --fix src",
-		"prettier": "prettier --write src",
-		"tc": "tsc --noEmit"
-	},
-	"devDependencies": {
-		"@commitlint/cli": "^15.0.0",
-		"@commitlint/config-conventional": "^15.0.0",
-		"@leonzalion/eslint-config": "latest",
-		"@leonzalion/markdownlint-config": "latest",
-		"@leonzalion/prettier-config": "latest",
-		"@leonzalion/tsconfig": "latest",
-		"@types/jest": "^27.0.3",
-		"@types/node": "^16.11.12",
-		"eslint": "^8.4.1",
-		"execa": "^6.0.0",
-		"husky": "^7.0.4",
-		"jest": "^27.4.5",
-		"lint-staged": "^12.1.2",
-		"liontypes": "^1.0.2",
-		"node-fetch": "^3.1.0",
-		"prettier": "^2.5.1",
-		"rimraf": "^3.0.2",
-		"ts-jest": "^27.1.1",
-		"ts-node": "^10.4.0",
-		"tsc-alias": "^1.4.2",
-		"typescript": "^4.5.4",
-		"utility-types": "^3.10.0"
-	},
-	"peerDependencies": {
-		"@sinclair/typebox": "^0.23.1"
-	},
-	"dependencies": {
-		"ky": "^0.28.7",
-		"lion-architecture": "^1.0.3"
-	}
+  "name": "lionrest",
+  "version": "0.0.2",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "prettier": "@leonzalion/prettier-config",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "build": "rimraf dist && tsc && tsc-alias -p tsconfig.json",
+    "prepublish": "pnpm build",
+    "lint": "eslint --fix src",
+    "prettier": "prettier --write src",
+    "tc": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@leonzalion/eslint-config": "latest",
+    "@leonzalion/markdownlint-config": "latest",
+    "@leonzalion/prettier-config": "latest",
+    "@leonzalion/tsconfig": "latest",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.12",
+    "eslint": "^8.4.1",
+    "execa": "^6.0.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.5",
+    "lint-staged": "^12.1.2",
+    "liontypes": "^1.0.2",
+    "node-fetch": "^3.1.0",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.1",
+    "ts-node": "^10.4.0",
+    "tsc-alias": "^1.4.2",
+    "typescript": "^4.5.4",
+    "utility-types": "^3.10.0"
+  },
+  "peerDependencies": {
+    "@sinclair/typebox": "^0.23.1"
+  },
+  "dependencies": {
+    "ky": "^0.28.7",
+    "lion-architecture": "^1.0.3"
+  },
+  "types": "./dist/index.d.ts",
+  "description": "LionREST provides a simple way to define a type-safe REST API in TypeScript **without the need for code generation.**",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonzalion/lionrest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/leonzalion/lionrest/issues"
+  },
+  "homepage": "https://github.com/leonzalion/lionrest#readme"
 }
