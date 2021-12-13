@@ -1,14 +1,11 @@
 import type { RestSchemaBlueprint } from '~/types/blueprint';
+import type { HttpMethod } from '~/types/method';
 import type { TypedResponsePromise } from '~/types/response';
 import type { BaseUrlParams } from '~/types/schema';
 
 import type {
 	AreKyOptionsOptional,
-	DeleteRoutes,
-	GetRoutes,
-	PatchRoutes,
-	PostRoutes,
-	PutRoutes,
+	MethodRoutes,
 	RestSchemaUrls,
 	TypedKyOptions,
 } from '../../types/request';
@@ -28,6 +25,21 @@ export function requestModule<B extends RestSchemaBlueprint>() {
 		return newUrl;
 	}
 
+	function createKyMethod<Method extends HttpMethod>(method: Method) {
+		const { kyMethod } = defineMethods({
+			kyMethod<Url extends RestSchemaUrls<MethodRoutes<B, Method>>>(
+				url: Url,
+				...options: AreKyOptionsOptional<B, Url, Method> extends true
+					? [options?: TypedKyOptions<B, Url, Method>]
+					: [options: TypedKyOptions<B, Url, Method>]
+			): TypedResponsePromise<B, Url, Method> {
+				const newUrl = replaceUrlParams(url, options[0]?.urlParams);
+				return this._getKy()(newUrl, { method, ...options[0] });
+			},
+		});
+		return kyMethod;
+	}
+
 	return defineMethods({
 		_getKy() {
 			if (this.ky === undefined) {
@@ -35,50 +47,10 @@ export function requestModule<B extends RestSchemaBlueprint>() {
 			}
 			return this.ky;
 		},
-		get<Url extends RestSchemaUrls<GetRoutes<B>>>(
-			url: Url,
-			...options: AreKyOptionsOptional<B, Url, 'get'> extends true
-				? [options?: TypedKyOptions<B, Url, 'get'>]
-				: [options: TypedKyOptions<B, Url, 'get'>]
-		): TypedResponsePromise<B, Url, 'get'> {
-			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this._getKy().get(newUrl, options[0]);
-		},
-		post<Url extends RestSchemaUrls<PostRoutes<B>>>(
-			url: Url,
-			...options: AreKyOptionsOptional<B, Url, 'post'> extends true
-				? [options?: TypedKyOptions<B, Url, 'post'>]
-				: [options: TypedKyOptions<B, Url, 'post'>]
-		): TypedResponsePromise<B, Url, 'post'> {
-			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this._getKy().post(newUrl, options[0]);
-		},
-		put<Url extends RestSchemaUrls<PutRoutes<B>>>(
-			url: Url,
-			...options: AreKyOptionsOptional<B, Url, 'put'> extends true
-				? [options?: TypedKyOptions<B, Url, 'put'>]
-				: [options: TypedKyOptions<B, Url, 'put'>]
-		): TypedResponsePromise<B, Url, 'put'> {
-			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this._getKy().put(newUrl, options[0]);
-		},
-		patch<Url extends RestSchemaUrls<PatchRoutes<B>>>(
-			url: Url,
-			...options: AreKyOptionsOptional<B, Url, 'patch'> extends true
-				? [options?: TypedKyOptions<B, Url, 'patch'>]
-				: [options: TypedKyOptions<B, Url, 'patch'>]
-		): TypedResponsePromise<B, Url, 'patch'> {
-			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this._getKy().patch(newUrl, options[0]);
-		},
-		delete<Url extends RestSchemaUrls<DeleteRoutes<B>>>(
-			url: Url,
-			...options: AreKyOptionsOptional<B, Url, 'delete'> extends true
-				? [options?: TypedKyOptions<B, Url, 'delete'>]
-				: [options: TypedKyOptions<B, Url, 'delete'>]
-		): TypedResponsePromise<B, Url, 'delete'> {
-			const newUrl = replaceUrlParams(url, options[0]?.urlParams);
-			return this._getKy().delete(newUrl, options[0]);
-		},
+		get: createKyMethod('get'),
+		post: createKyMethod('post'),
+		put: createKyMethod('put'),
+		patch: createKyMethod('patch'),
+		delete: createKyMethod('delete'),
 	});
 }
