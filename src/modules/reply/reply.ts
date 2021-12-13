@@ -50,7 +50,8 @@ export function replyModule<B extends RestSchemaBlueprint>() {
 			return Object.assign(routeCreator, {
 				route: {
 					method: method.toUpperCase() as Uppercase<Method>,
-					url,
+					// replace /posts/{id} with /posts/:id
+					url: url.replace(/{(.*?)}/g, ':$1') as Url,
 				},
 			});
 		},
